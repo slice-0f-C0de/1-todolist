@@ -17,7 +17,7 @@ const tasks2 = [
 function App() {
     return (
         <div className="App">
-            <Todolist title={'First Todolist'} tasks={tasks1}/>
+            <Todolist title={'First Todolist'} tasks={tasks1} date={'03.03.24'}/>
             <Todolist title={'Second Todolist'} tasks={tasks2}/>
         </div>
     );
