@@ -5,6 +5,7 @@ import {Button} from "./Button";
 type TodolistType = {
     title: string
     tasks: TaskType[]
+    removeTask: (id: number) => void
 }
 
 type TaskType = {
@@ -13,7 +14,7 @@ type TaskType = {
     isDone: boolean
 }
 
-export const Todolist = ({title, tasks}: TodolistType) => {
+export const Todolist = ({title, tasks, ...props}: TodolistType) => {
     return <div>
         <h3>{title}</h3>
         <div>
@@ -26,6 +27,7 @@ export const Todolist = ({title, tasks}: TodolistType) => {
                     return <li key={task.id}>
                         <input type="checkbox" checked={task.isDone}/>
                         <span>{task.title}</span>
+                        <button onClick={() => props.removeTask(task.id)}>X</button>
                     </li>
                 })}
             </ul>
