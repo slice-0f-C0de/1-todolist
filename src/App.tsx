@@ -20,8 +20,8 @@ function App() {
         setTasks(deletedTask)
     }
 
-    const addTask = () => {
-        const newTask = {id: v1(), title: 'New Title', isDone: false}
+    const addTask = (newTitle: string) => {
+        const newTask = {id: v1(), title: newTitle, isDone: false}
         setTasks([...tasks, newTask])
     }
 
