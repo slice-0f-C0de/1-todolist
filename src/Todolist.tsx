@@ -3,12 +3,14 @@ import {Button} from "./Button";
 import {TypesForFilters} from "./App";
 
 type TodolistType = {
+    id: string
     title: string
     tasks: TaskType[]
     removeTask: (id: string) => void
-    changeFilter: (filters: TypesForFilters) => void
     addTask: (newTitle: string) => void
     changeTaskStatus: (id: string, newStatus: boolean) => void
+    filter: string
+    changeFilter: (todolistId: string, filter: TypesForFilters) => void
 }
 
 type TaskType = {
@@ -65,9 +67,9 @@ export const Todolist = ({title, tasks, ...props}: TodolistType) => {
             </ul>
         )}
         <div>
-            <Button title={'All'} onClick={() => props.changeFilter('All')}/>
-            <Button title={'Active'} onClick={() => props.changeFilter('Active')}/>
-            <Button title={'Completed'} onClick={() => props.changeFilter('Completed')}/>
+            <Button title={'All'} onClick={() => props.changeFilter(props.id,'All')}/>
+            <Button title={'Active'} onClick={() => props.changeFilter(props.id,'Active')}/>
+            <Button title={'Completed'} onClick={() => props.changeFilter(props.id,'Completed')}/>
         </div>
     </div>
 }
