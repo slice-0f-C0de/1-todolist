@@ -26,11 +26,8 @@ function App() {
     }
 
     const changeTaskStatus = (id: string, newStatus: boolean) => {
-        const task = tasks.find(el => el.id === id)
-        if (task) {
-            task.isDone = newStatus
-            setTasks([...tasks])
-        }
+        const newTaskStatus = tasks.map(el => el.id === id ? {...el, isDone: newStatus} : el)
+        setTasks(newTaskStatus)
     }
 
     const changeFilter = (filters: TypesForFilters) => {
