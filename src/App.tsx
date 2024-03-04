@@ -2,7 +2,11 @@ import React, {useState} from 'react';
 import './App.css';
 import {Todolist} from "./Todolist";
 
+export type TypesForFilters = 'All' | 'Active' | 'Completed'
+
 function App() {
+
+    const [filter, setFilter] = useState<TypesForFilters>('All')
 
     const [tasks, setTasks] = useState([
         {id: 1, title: 'HTML&CSS', isDone: true},
@@ -15,11 +19,27 @@ function App() {
         setTasks(deletedTask)
     }
 
-    return (
-        <div className="App">
-            <Todolist title={'First Todolist'} tasks={tasks} removeTask={removeTask}/>
-        </div>
-    );
-}
+    const changeFilter = (filters: TypesForFilters) => {
+        setFilter(filters)
+    }
 
-export default App;
+    let allTasks = tasks
+
+    if (filter === 'Active') {
+        allTasks = tasks.filter(el => !el.isDone)
+    }
+    if (filter === "Completed") {
+        allTasks = tasks.filter(el => el.isDone)
+    }
+
+        return (
+            <div className="App">
+                <Todolist title={'First Todolist'}
+                          tasks={allTasks}
+                          removeTask={removeTask}
+                          changeFilter={changeFilter}/>
+            </div>
+        );
+    }
+
+    export default App;
