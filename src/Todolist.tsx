@@ -1,4 +1,6 @@
 import React from "react";
+import {Button} from "./Button";
+
 
 type TodolistType = {
     title: string
@@ -16,7 +18,7 @@ export const Todolist = ({title, tasks}: TodolistType) => {
         <h3>{title}</h3>
         <div>
             <input/>
-            <button>+</button>
+            <Button title={'+'} />
         </div>
         {tasks.length === 0 ? (<p>Тасок нет!</p>) : (
             <ul>
@@ -29,9 +31,9 @@ export const Todolist = ({title, tasks}: TodolistType) => {
             </ul>
         )}
         <div>
-            <button>All</button>
-            <button>Active</button>
-            <button>Completed</button>
+            <Button title={'All'} />
+            <Button title={'Active'} />
+            <Button title={'Completed'} />
         </div>
     </div>
 }
