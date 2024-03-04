@@ -1,26 +1,28 @@
-import React from "react";
+import React, {useState} from "react";
 import {Button} from "./Button";
 import {TypesForFilters} from "./App";
 
 type TodolistType = {
     title: string
     tasks: TaskType[]
-    removeTask: (id: number) => void
+    removeTask: (id: string) => void
     changeFilter: (filters: TypesForFilters) => void
+    addTask: () => void
 }
 
 type TaskType = {
-    id: number
+    id: string
     title: string
     isDone: boolean
 }
 
 export const Todolist = ({title, tasks, ...props}: TodolistType) => {
+
     return <div>
         <h3>{title}</h3>
         <div>
             <input/>
-            <Button title={'+'} />
+            <Button onClick={() => props.addTask()} title={'+'} />
         </div>
         {tasks.length === 0 ? (<p>Тасок нет!</p>) : (
             <ul>
