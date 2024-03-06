@@ -6,9 +6,9 @@ type TodolistType = {
     id: string
     title: string
     tasks: TaskType[]
-    removeTask: (id: string) => void
-    addTask: (newTitle: string) => void
-    changeTaskStatus: (id: string, newStatus: boolean) => void
+    removeTask: (todolistId: string, id: string) => void
+    addTask: (todolistId: string, newTitle: string) => void
+    changeTaskStatus: (todolistId: string, id: string, newStatus: boolean) => void
     filter: string
     changeFilter: (todolistId: string, filter: TypesForFilters) => void
 }
@@ -28,7 +28,7 @@ export const Todolist = ({title, tasks, ...props}: TodolistType) => {
     }
 
     const addTaskHandler = () => {
-        props.addTask(newTitle)
+        props.addTask(props.id, newTitle)
         setNewTitle('')
     }
 
@@ -52,7 +52,7 @@ export const Todolist = ({title, tasks, ...props}: TodolistType) => {
 
                     const changeTaskStatusHandler = (e: ChangeEvent<HTMLInputElement>) => {
                         const newStatus = e.currentTarget.checked
-                        props.changeTaskStatus(task.id, newStatus)
+                        props.changeTaskStatus(props.id, task.id, newStatus)
                     }
 
                     return <li key={task.id}>
@@ -61,7 +61,7 @@ export const Todolist = ({title, tasks, ...props}: TodolistType) => {
                                checked={task.isDone}
                                onChange={changeTaskStatusHandler}/>
                         <span>{task.title}</span>
-                        <Button title={'X'} onClick={() => props.removeTask(task.id)}/>
+                        <Button title={'X'} onClick={() => props.removeTask(props.id, task.id)}/>
                     </li>
                 })}
             </ul>
