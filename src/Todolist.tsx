@@ -1,6 +1,7 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from "react";
 import {Button} from "./Button";
 import {TypesForFilters} from "./App";
+import AddItemForm from "./AddItemForm";
 
 type TodolistType = {
     id: string
@@ -22,33 +23,15 @@ type TaskType = {
 
 export const Todolist = ({title, tasks, ...props}: TodolistType) => {
 
-    const [newTitle, setNewTitle] = useState('')
-
-    const onChangeTitleHandler = (event: ChangeEvent<HTMLInputElement>) => {
-        setNewTitle(event.currentTarget.value)
-    }
-
-    const addTaskHandler = () => {
-        props.addTask(props.id, newTitle)
-        setNewTitle('')
-    }
-
-    const addTaskOnKeyUpHandler = (event: KeyboardEvent<HTMLInputElement>) => {
-        if (event.key === 'Enter') {
-            addTaskHandler()
-        }
+    const addTask = (title: string) => {
+        props.addTask(props.id, title)
     }
 
     return <div>
         <h3>{title}
         <button onClick={() => props.removeTodolist(props.id)}>X</button>
         </h3>
-        <div>
-            <input value={newTitle}
-                   onChange={onChangeTitleHandler}
-                   onKeyUp={addTaskOnKeyUpHandler}/>
-            <Button title={'+'} onClick={addTaskHandler}/>
-        </div>
+        <AddItemForm callback={addTask}/>
         {tasks.length === 0 ? (<p>Тасок нет!</p>) : (
             <ul>
                 {tasks.map(task => {
