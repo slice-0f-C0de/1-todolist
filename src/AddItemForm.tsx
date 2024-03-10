@@ -2,7 +2,7 @@ import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
 import {Button} from "./Button";
 
 type AddItemFormType = {
-    callback: (newTitle: string) => void
+    addItem: (newTitle: string) => void
 }
 
 const AddItemForm = (props: AddItemFormType) => {
@@ -10,7 +10,7 @@ const AddItemForm = (props: AddItemFormType) => {
     const [newTitle, setNewTitle] = useState('')
 
     const addItem = () => {
-        props.callback(newTitle)
+        props.addItem(newTitle)
         setNewTitle('')
     }
 
